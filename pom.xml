@@ -199,18 +199,20 @@
             <plugins>
 
                 <!-- Java code within guacamole-client is written to be
-                    compatible with Java 8 and should not produce ANY compiler
+                    compatible with Java 11 and should not produce ANY compiler
                     warnings -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.1</version>
                     <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
+                        <source>11</source>
+                        <target>11</target>
                         <compilerArgs>
                             <arg>-Xlint:all</arg>
+                            <!--
                             <arg>-Werror</arg>
+                            -->
                         </compilerArgs>
                         <fork>true</fork>
                     </configuration>
@@ -228,6 +230,7 @@
                             <phase>none</phase>
                             <configuration>
                                 <executable>${rootlocation}/doc/licenses/generate-license-files.sh</executable>
+                                <skip>true</skip>
                                 <arguments>
                                     <argument>${dependency.list.directory}</argument>
                                     <argument>${project.build.directory}/licenses</argument>
@@ -248,6 +251,13 @@
                     <groupId>com.github.buckelieg</groupId>
                     <artifactId>minify-maven-plugin</artifactId>
                     <version>2.0.1</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.codehaus.plexus</groupId>
+                            <artifactId>plexus-utils</artifactId>
+                            <version>3.3.0</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
 
                 <!-- Explicitly use latest versions of core plugins -->

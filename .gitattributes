@@ -1,0 +1,33 @@
+﻿# Auto-detect text files, normalize to LF in repository
+* text=auto
+
+# These are definitely text files
+*.java text
+*.xml text
+*.properties text
+*.md text
+*.txt text
+*.json text
+*.yml text
+*.yaml text
+*.js text
+*.css text
+*.html text
+# Eclipse IDE files
+*.classpath text
+*.project text
+.settings/* text
+
+# Shell scripts MUST stay LF (Linux requirement)
+*.sh text eol=lf
+
+# Windows scripts can be CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files
+*.jar binary
+*.war binary
+*.png binary
+*.jpg binary
+*.gif binary
