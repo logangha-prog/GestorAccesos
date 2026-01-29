@@ -112,15 +112,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <!-- ADD THIS DEPENDENCIES SECTION 
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.plexus</groupId>
-                        <artifactId>plexus-utils</artifactId>
-                        <version>3.3.0</version>
-                    </dependency>
-                </dependencies>
-                -->
             </plugin>
 
             <!-- Unit test using Jasmin and PhantomJS -->
