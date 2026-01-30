@@ -1,0 +1,61 @@
+<div class="settings section logged-users" ng-class="{loading: !isLoaded()}">
+
+    <!-- User Session management -->
+    <p>{{'SETTINGS_LOGGED.HELP_LOGGED' | translate}}</p>
+
+    <!-- Form action buttons -->
+    <div class="action-buttons">
+        <button class="delete-sessions danger" ng-disabled="!canDeleteLoggedUser()" ng-click="deleteLoggedUsers()">{{'SETTINGS_LOGGED.ACTION_DELETE' | translate}}</button>
+    </div>
+
+    <!-- Session filter -->
+    <guac-filter filtered-items="filteredWrappers" items="wrappers"
+                 placeholder="'SETTINGS_LOGGED.FIELD_PLACEHOLDER_FILTER' | translate"
+                 properties="filteredWrapperProperties"></guac-filter>
+
+    <!-- List of current active users -->
+    <table class="sorted session-list">
+        <thead>
+            <tr>
+                <th class="select-session">
+                    <input type="checkbox" 
+                        ng-disabled="!canEnableAllLoggedUsers()"
+                    	ng-model="selectAll" 
+                    	ng-click="checkAll()" />
+                </th>
+                <th guac-sort-order="wrapperOrder" guac-sort-property="'loggedUser.username'">
+                    {{'SETTINGS_LOGGED.TABLE_HEADER_LOGGED_IDUSER' | translate}}
+                </th>
+                <th guac-sort-order="wrapperOrder" guac-sort-property="'loggedUser.fullname'">
+                    {{'SETTINGS_LOGGED.TABLE_HEADER_LOGGED_USERNAME' | translate}}
+                </th>
+                <th guac-sort-order="wrapperOrder" guac-sort-property="'loggedUser.management'">
+                    {{'SETTINGS_LOGGED.TABLE_HEADER_LOGGED_MANAGEMENT' | translate}}
+                </th>
+                <th guac-sort-order="wrapperOrder" guac-sort-property="'loggedUser.accesstype'">
+                    {{'SETTINGS_LOGGED.TABLE_HEADER_LOGGED_ACCESS' | translate}}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="wrapper in wrapperPage" class="session">
+                <td class="select-session">
+                    <input ng-change="wrapperSelectionChange(wrapper)" type="checkbox" ng-model="wrapper.checked">
+                </td>
+                <td><guac-user-item username="wrapper.loggedUser.username"></guac-user-item></td>
+                <td>{{wrapper.loggedUser.fullname}}</td>
+                <td>{{wrapper.loggedUser.management}}</td>
+                <td>{{wrapper.loggedUser.accesstype}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Text displayed if no sessions exist -->
+    <p class="placeholder" ng-hide="wrapperPage.length">
+        {{'SETTINGS_LOGGED.INFO_NO_LOGGED' | translate}}
+    </p>
+
+    <!-- Pager for session list -->
+    <guac-pager page="wrapperPage" page-size="25"
+                items="filteredWrappers | orderBy : wrapperOrder.predicate"></guac-pager>
+</div>
